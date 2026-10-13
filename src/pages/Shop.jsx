@@ -106,6 +106,7 @@ function Shop({ onAgregar }) {
               precio={p.precio}
               imagen={p.imagen}
               onAgregar={() => onAgregar(p)}
+              fondoBlanco
             />
           </Col>
         ))}
