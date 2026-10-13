@@ -4,7 +4,7 @@ import ProductCard from '../components/ProductCard'
 import usePageTitle from '../hooks/usePageTitle'
 import { productos, categorias } from '../data/products'
 
-function Shop() {
+function Shop({ onAgregar }) {
   usePageTitle('Tienda')
   const [params, setParams] = useSearchParams()
   const categoria = params.get('categoria')
@@ -32,7 +32,13 @@ function Shop() {
       <Row xs={1} sm={2} lg={4} className="g-3">
         {lista.map((p) => (
           <Col key={p.id}>
-            <ProductCard categoria={p.categoria} nombre={p.nombre} precio={p.precio} imagen={p.imagen} />
+            <ProductCard
+              categoria={p.categoria}
+              nombre={p.nombre}
+              precio={p.precio}
+              imagen={p.imagen}
+              onAgregar={() => onAgregar(p)}
+            />
           </Col>
         ))}
       </Row>
