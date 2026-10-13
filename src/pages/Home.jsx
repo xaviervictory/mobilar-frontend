@@ -7,7 +7,7 @@ import CategoryGrid from '../components/CategoryGrid'
 import usePageTitle from '../hooks/usePageTitle'
 import { productos, categorias, banners } from '../data/products'
 
-function Home() {
+function Home({ onAgregar }) {
   usePageTitle('Streetwear & Urban Fashion')
   const destacados = productos.filter((p) => p.destacado)
 
@@ -18,7 +18,7 @@ function Home() {
       <Container className="py-5">
         <Row className="g-4">
           <Col lg={9}>
-            <FeaturedProducts productos={destacados} />
+            <FeaturedProducts productos={destacados} onAgregar={onAgregar} />
           </Col>
           <Col lg={3}>
             <BannerCard {...banners.nuevaColeccion} />

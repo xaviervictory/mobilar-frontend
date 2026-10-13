@@ -3,7 +3,7 @@ import ProductCard from '../components/ProductCard'
 import usePageTitle from '../hooks/usePageTitle'
 import { productos } from '../data/products'
 
-function Offers() {
+function Offers({ onAgregar }) {
   usePageTitle('Ofertas')
   const ofertas = productos.filter((p) => p.oferta)
 
@@ -13,7 +13,13 @@ function Offers() {
       <Row xs={1} sm={2} lg={4} className="g-3">
         {ofertas.map((p) => (
           <Col key={p.id}>
-            <ProductCard categoria={p.categoria} nombre={p.nombre} precio={p.precio} imagen={p.imagen} />
+            <ProductCard
+              categoria={p.categoria}
+              nombre={p.nombre}
+              precio={p.precio}
+              imagen={p.imagen}
+              onAgregar={() => onAgregar(p)}
+            />
           </Col>
         ))}
       </Row>

@@ -11,7 +11,7 @@ const links = [
   { texto: 'Contacto', ruta: '/contacto' },
 ]
 
-function Navbar() {
+function Navbar({ cantidad }) {
   return (
     <BsNavbar expand="lg" bg="black" variant="dark" sticky="top" className="py-3">
       <Container>
@@ -39,10 +39,12 @@ function Navbar() {
               <InputGroup.Text className="rounded-end-pill bg-transparent"><Search /></InputGroup.Text>
             </InputGroup>
             <Person size={26} />
-            <span className="position-relative">
+            <Link to="/carrito" className="position-relative text-light" aria-label="Ver carrito">
               <Cart size={26} />
-              <Badge pill bg="light" text="dark" className="position-absolute top-0 start-100 translate-middle">0</Badge>
-            </span>
+              <Badge pill bg="light" text="dark" className="position-absolute top-0 start-100 translate-middle">
+                {cantidad}
+              </Badge>
+            </Link>
           </Form>
         </BsNavbar.Collapse>
       </Container>
