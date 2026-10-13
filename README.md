@@ -2,7 +2,7 @@
 
 NOIR es una tienda online de indumentaria urbana (streetwear) desarrollada con **React + Vite** como proyecto de la cursada de programación. Permite navegar el catálogo, filtrar por categorías, agregar productos al carrito y consultar datos reales desde una API pública.
 
-🔗 **Demo en línea:** https://mobilar-frontend.vercel.app](https://noiropa-frontend.vercel.app
+🔗 **Demo en línea:** https://mobilar-frontend.vercel.app](https://noiropa-frontend.vercel.app](https://noiropa-frontend.vercel.app
 
 ## Funcionalidades
 
