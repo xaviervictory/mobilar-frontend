@@ -1,14 +1,15 @@
 import { Card, Button } from 'react-bootstrap'
 import { Cart } from 'react-bootstrap-icons'
 
-function ProductCard({ categoria, nombre, precio, imagen, onAgregar }) {
+// fondoBlanco: para fotos de productos con fondo blanco (como las de la API)
+function ProductCard({ categoria, nombre, precio, imagen, onAgregar, fondoBlanco = false }) {
   return (
     <Card bg="dark" text="light" className="h-100 border-secondary-subtle rounded-1">
       <Card.Img
         variant="top"
         src={imagen}
         alt={nombre}
-        className="rounded-0 object-fit-contain bg-white p-3"
+        className={fondoBlanco ? 'rounded-0 object-fit-contain bg-white p-3' : 'rounded-0 object-fit-cover'}
         style={{ height: 280 }}
       />
       <Card.Body className="d-flex flex-column">
