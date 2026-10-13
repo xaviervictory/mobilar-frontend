@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import { Navbar as BsNavbar, Nav, NavDropdown, Container, Form, InputGroup, Badge } from 'react-bootstrap'
-import { Search, Person, Cart } from 'react-bootstrap-icons'
+import { Search, Person, PersonCheck, Cart } from 'react-bootstrap-icons'
 import { categoriasTienda } from '../data/categoriasTienda'
 
 const links = [
@@ -11,7 +11,7 @@ const links = [
   { texto: 'Contacto', ruta: '/contacto' },
 ]
 
-function Navbar({ cantidad }) {
+function Navbar({ cantidad, usuario }) {
   return (
     <BsNavbar expand="lg" bg="black" variant="dark" sticky="top" className="py-3">
       <Container>
@@ -38,7 +38,14 @@ function Navbar({ cantidad }) {
               <Form.Control type="search" placeholder="Buscar productos..." className="rounded-start-pill bg-transparent" />
               <InputGroup.Text className="rounded-end-pill bg-transparent"><Search /></InputGroup.Text>
             </InputGroup>
-            <Person size={26} />
+            <Link
+              to={usuario ? '/perfil' : '/login'}
+              className="text-light text-decoration-none d-flex align-items-center gap-2"
+              aria-label={usuario ? 'Ver mi perfil' : 'Iniciar sesión'}
+            >
+              {usuario ? <PersonCheck size={26} className="text-lime" /> : <Person size={26} />}
+              {usuario && <small className="text-nowrap">{usuario.nombre.split(' ')[0]}</small>}
+            </Link>
             <Link to="/carrito" className="position-relative text-light" aria-label="Ver carrito">
               <Cart size={26} />
               <Badge pill bg="light" text="dark" className="position-absolute top-0 start-100 translate-middle">
