@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import { Navbar as BsNavbar, Nav, NavDropdown, Container, Form, InputGroup, Badge } from 'react-bootstrap'
 import { Search, Person, Cart } from 'react-bootstrap-icons'
-import { categorias } from '../data/products'
+import { categoriasTienda } from '../data/categoriasTienda'
 
 const links = [
   { texto: 'Inicio', ruta: '/' },
@@ -23,9 +23,9 @@ function Navbar({ cantidad }) {
               <Nav.Link key={l.ruta} as={NavLink} to={l.ruta} end>{l.texto}</Nav.Link>
             ))}
             <NavDropdown title="Categorías" menuVariant="dark">
-              {categorias.map((c) => (
-                <NavDropdown.Item key={c.id} as={Link} to={`/tienda?categoria=${c.nombre}`}>
-                  {c.nombre}
+              {categoriasTienda.map((c) => (
+                <NavDropdown.Item key={c} as={Link} to={`/tienda?categoria=${c}`}>
+                  {c}
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
