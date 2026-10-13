@@ -1,37 +1,45 @@
-import { Container, Form, Button, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col } from 'react-bootstrap'
+import ContactInfo from '../components/ContactInfo'
+import ContactForm from '../components/ContactForm'
 import usePageTitle from '../hooks/usePageTitle'
+import { datosContacto } from '../data/contacto'
 
-function Contact() {
+function Contact({ usuario }) {
   usePageTitle('Contacto')
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Más adelante: enviar el formulario y avisar con SweetAlert2
-  }
-
   return (
-    <Container className="py-5">
-      <h1 className="fs-2 mb-4">Contacto</h1>
-      <Row>
-        <Col lg={6}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="nombre">
-              <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder="Tu nombre" required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" placeholder="tu@email.com" required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="mensaje">
-              <Form.Label>Mensaje</Form.Label>
-              <Form.Control as="textarea" rows={4} required />
-            </Form.Group>
-            <Button type="submit" variant="light" className="rounded-0 text-uppercase">Enviar</Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <header className="bg-black border-bottom border-secondary-subtle py-5">
+        <Container>
+          <p className="small text-uppercase text-secondary mb-2">Estamos para ayudarte</p>
+          <h1 className="display-5 fw-bold">
+            <span className="text-lime">Contacto</span>
+          </h1>
+          <p className="col-lg-7 fs-5 mb-0">
+            ¿Dudas sobre un pedido, un talle o un cambio? Escribinos y te respondemos lo antes posible.
+            Mirá también nuestras <Link to="/nosotros#preguntas-frecuentes" className="text-lime">preguntas frecuentes</Link>.
+          </p>
+        </Container>
+      </header>
+
+      <Container className="py-5">
+        <Row className="g-5">
+          <Col lg={7}>
+            <section aria-labelledby="formulario">
+              <h2 id="formulario" className="fs-4 mb-4">Envianos un mensaje</h2>
+              <ContactForm nombreInicial={usuario?.nombre} emailInicial={usuario?.email} />
+            </section>
+          </Col>
+          <Col lg={5}>
+            <section aria-labelledby="datos">
+              <h2 id="datos" className="fs-4 mb-4">Otras formas de contactarnos</h2>
+              <ContactInfo datos={datosContacto} />
+            </section>
+          </Col>
+        </Row>
+      </Container>
+    </>
   )
 }
 
