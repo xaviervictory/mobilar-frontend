@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
 import ProductCard from './ProductCard'
 
-function FeaturedProducts({ productos }) {
+function FeaturedProducts({ productos, onAgregar }) {
   return (
     <section>
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -12,7 +12,13 @@ function FeaturedProducts({ productos }) {
       <Row xs={1} sm={2} xl={4} className="g-3">
         {productos.map((p) => (
           <Col key={p.id}>
-            <ProductCard categoria={p.categoria} nombre={p.nombre} precio={p.precio} imagen={p.imagen} />
+            <ProductCard
+              categoria={p.categoria}
+              nombre={p.nombre}
+              precio={p.precio}
+              imagen={p.imagen}
+              onAgregar={() => onAgregar(p)}
+            />
           </Col>
         ))}
       </Row>

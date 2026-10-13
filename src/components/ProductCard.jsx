@@ -1,7 +1,7 @@
 import { Card, Button } from 'react-bootstrap'
 import { Cart } from 'react-bootstrap-icons'
 
-function ProductCard({ categoria, nombre, precio, imagen }) {
+function ProductCard({ categoria, nombre, precio, imagen, onAgregar }) {
   return (
     <Card bg="dark" text="light" className="h-100 border-secondary-subtle rounded-1">
       <Card.Img variant="top" src={imagen} alt={nombre} className="rounded-0" />
@@ -10,7 +10,13 @@ function ProductCard({ categoria, nombre, precio, imagen }) {
         <Card.Title as="h3" className="fs-6 text-capitalize">{nombre}</Card.Title>
         <div className="d-flex justify-content-between align-items-center mt-auto">
           <span className="fw-semibold">$ {precio.toLocaleString('es-AR')}</span>
-          <Button variant="outline-light" size="sm" className="border-0" aria-label={`Agregar ${nombre} al carrito`}>
+          <Button
+            variant="outline-light"
+            size="sm"
+            className="border-0"
+            onClick={onAgregar}
+            aria-label={`Agregar ${nombre} al carrito`}
+          >
             <Cart size={20} />
           </Button>
         </div>
