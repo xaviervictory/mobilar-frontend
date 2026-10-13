@@ -4,7 +4,13 @@ import { Cart } from 'react-bootstrap-icons'
 function ProductCard({ categoria, nombre, precio, imagen, onAgregar }) {
   return (
     <Card bg="dark" text="light" className="h-100 border-secondary-subtle rounded-1">
-      <Card.Img variant="top" src={imagen} alt={nombre} className="rounded-0" />
+      <Card.Img
+        variant="top"
+        src={imagen}
+        alt={nombre}
+        className="rounded-0 object-fit-contain bg-white p-3"
+        style={{ height: 280 }}
+      />
       <Card.Body className="d-flex flex-column">
         <small className="text-secondary text-uppercase">{categoria}</small>
         <Card.Title as="h3" className="fs-6 text-capitalize">{nombre}</Card.Title>
