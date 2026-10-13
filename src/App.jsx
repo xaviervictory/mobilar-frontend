@@ -9,7 +9,11 @@ import Offers from './pages/Offers'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Cart from './pages/Cart'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
+import { registrarUsuario, iniciarSesionUsuario, leerSesion, guardarSesion } from './services/auth'
 
 function leerCarrito() {
   try {
@@ -23,10 +27,30 @@ function App() {
   // Estado del carrito: lista de productos con su cantidad
   const [carrito, setCarrito] = useState(leerCarrito)
 
-  // Se ejecuta cada vez que cambia el carrito: lo guarda en el navegador
+  // Estado de la sesión: null si nadie inició sesión
+  const [usuario, setUsuario] = useState(leerSesion)
+
+  // Guarda el carrito cada vez que cambia
   useEffect(() => {
     localStorage.setItem('carrito', JSON.stringify(carrito))
   }, [carrito])
+
+  // Guarda la sesión cada vez que el usuario inicia o cierra sesión
+  useEffect(() => {
+    guardarSesion(usuario)
+  }, [usuario])
+
+  const registrar = async (datos) => {
+    const nuevo = await registrarUsuario(datos)
+    setUsuario(nuevo)
+  }
+
+  const iniciarSesion = async (email, password) => {
+    const existente = await iniciarSesionUsuario(email, password)
+    setUsuario(existente)
+  }
+
+  const cerrarSesion = () => setUsuario(null)
 
   const agregarAlCarrito = (producto) => {
     setCarrito((actual) => {
@@ -56,7 +80,7 @@ function App() {
   return (
     <div data-bs-theme="dark">
       <TopBar />
-      <Navbar cantidad={cantidadTotal} />
+      <Navbar cantidad={cantidadTotal} usuario={usuario} />
       <main>
         <Routes>
           <Route path="/" element={<Home onAgregar={agregarAlCarrito} />} />
@@ -74,6 +98,12 @@ function App() {
                 onVaciar={vaciarCarrito}
               />
             }
+          />
+          <Route path="/login" element={<Login usuario={usuario} onIniciarSesion={iniciarSesion} />} />
+          <Route path="/registro" element={<Register usuario={usuario} onRegistrar={registrar} />} />
+          <Route
+            path="/perfil"
+            element={<Profile usuario={usuario} cantidadCarrito={cantidadTotal} onCerrarSesion={cerrarSesion} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
